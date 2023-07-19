@@ -5,14 +5,30 @@ class ArticlesManager extends AbstractManager {
     super({ table: "articles" });
   }
 
-  findAll() {
+  findAllArticle() {
     return this.database.query(`select *  from  ${this.table}`);
   }
 
-  find(id) {
+  findByArticle(id) {
     return this.database.query(`select * from  ${this.table} where id = ?`, [
       id,
     ]);
+  }
+
+  updateArticle(article) {
+    return this.database.query(
+      `update ${this.table} set title = ?, info = ?, price = ?, color = ?, description = ?, stock = ?, categorie = ? where id = ?`,
+      [
+        article.title,
+        article.info,
+        article.price,
+        article.color,
+        article.description,
+        article.stock,
+        article.categorie,
+        article.id,
+      ]
+    );
   }
 }
 

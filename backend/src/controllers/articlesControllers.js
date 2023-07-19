@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.articles
-    .findAll()
+    .findAllArticle()
     .then(([rows]) => {
       res.send(rows);
     })
@@ -14,7 +14,7 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   models.articles
-    .find(req.params.id)
+    .findByArticle(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -28,27 +28,27 @@ const read = (req, res) => {
     });
 };
 
-// const edit = (req, res) => {
-//   const item = req.body;
+const edit = (req, res) => {
+  const article = req.body;
 
-//   // TODO validations (length, format...)
+  // TODO validations (length, format...)
 
-//   item.id = parseInt(req.params.id, 10);
+  article.id = parseInt(req.params.id, 10);
 
-//   models.item
-//     .update(item)
-//     .then(([result]) => {
-//       if (result.affectedRows === 0) {
-//         res.sendStatus(404);
-//       } else {
-//         res.sendStatus(204);
-//       }
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// };
+  models.articles
+    .updateArticle(article)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 // const add = (req, res) => {
 //   const item = req.body;
@@ -85,4 +85,5 @@ const read = (req, res) => {
 module.exports = {
   browse,
   read,
+  edit,
 };
