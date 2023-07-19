@@ -13,7 +13,19 @@ const verifyToken = (token) => {
 const checkUser = (req, res, next) => {
   if (req.cookies.super_token) {
     const token = verifyToken(req.cookies.super_token);
-    if (token) {
+    if (token.role === 0 || token.role === 1) {
+      next();
+    } else {
+      res.status(401).json({ msg: "Unauthorized" });
+    }
+  } else {
+    res.status(401).json({ msg: "Unauthorized" });
+  }
+};
+const checkAdmin = (req, res, next) => {
+  if (req.cookies.super_token) {
+    const token = verifyToken(req.cookies.super_token);
+    if (token.role === 1) {
       next();
     } else {
       res.status(401).json({ msg: "Unauthorized" });
@@ -23,4 +35,4 @@ const checkUser = (req, res, next) => {
   }
 };
 
-module.exports = { createJwt, checkUser };
+module.exports = { createJwt, checkUser, checkAdmin };
