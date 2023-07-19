@@ -45,21 +45,20 @@ const edit = async (req, res) => {
   }
 };
 
-// const add = (req, res) => {
-//   const item = req.body;
-
-//   // TODO validations (length, format...)
-
-//   models.item
-//     .insert(item)
-//     .then(([result]) => {
-//       res.location(`/items/${result.insertId}`).sendStatus(201);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// };
+const add = async (req, res) => {
+  const article = req.body;
+  try {
+    const { error } = await articleSchema().validate(article, {
+      abortEarly: false,
+    });
+    if (error) throw new Error(error);
+    await models.articles.insertArticle(article);
+    res.status(201).json({ msg: "Article Créé" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Creation Invalide" });
+  }
+};
 
 // const destroy = (req, res) => {
 //   models.item
@@ -81,4 +80,5 @@ module.exports = {
   browse,
   read,
   edit,
+  add,
 };

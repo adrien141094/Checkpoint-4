@@ -30,6 +30,22 @@ class ArticlesManager extends AbstractManager {
       ]
     );
   }
+
+  insertArticle(article) {
+    return this.database.query(
+      `
+    insert into ${this.table} (title, info, price, color, description, stock, categorie) values (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        article.title,
+        article.info,
+        article.price,
+        article.color,
+        article.description,
+        article.stock,
+        article.categorie,
+      ]
+    );
+  }
 }
 
 module.exports = ArticlesManager;
