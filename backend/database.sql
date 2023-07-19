@@ -8,10 +8,10 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  username varchar(100) NOT NULL,
+  username varchar(100),
   mail varchar(100) NOT NULL,
   password varchar(100) NOT NULL,
-  admin TINYINT NOT NULL
+  admin TINYINT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

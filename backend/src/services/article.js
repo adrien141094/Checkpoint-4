@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const articleSchema = () => {
+const checkArticleData = () => {
   return Joi.object({
     id: Joi.number().allow(null).optional(),
     title: Joi.string().required(),
@@ -13,4 +13,4 @@ const articleSchema = () => {
   });
 };
 
-module.exports = articleSchema;
+module.exports = checkArticleData;

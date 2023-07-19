@@ -1,5 +1,5 @@
 const models = require("../models");
-const articleSchema = require("../services/article");
+const checkArticleData = require("../services/article");
 
 const browse = (req, res) => {
   models.articles
@@ -33,7 +33,7 @@ const edit = async (req, res) => {
   const article = req.body;
   article.id = parseInt(req.params.id, 10);
   try {
-    const { error } = await articleSchema().validate(article, {
+    const { error } = await checkArticleData().validate(article, {
       abortEarly: false,
     });
     if (error) throw new Error(error);
@@ -48,7 +48,7 @@ const edit = async (req, res) => {
 const add = async (req, res) => {
   const article = req.body;
   try {
-    const { error } = await articleSchema().validate(article, {
+    const { error } = await checkArticleData().validate(article, {
       abortEarly: false,
     });
     if (error) throw new Error(error);
