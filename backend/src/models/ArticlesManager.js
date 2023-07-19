@@ -8,6 +8,12 @@ class ArticlesManager extends AbstractManager {
   findAll() {
     return this.database.query(`select *  from  ${this.table}`);
   }
+
+  find(id) {
+    return this.database.query(`select * from  ${this.table} where id = ?`, [
+      id,
+    ]);
+  }
 }
 
 module.exports = ArticlesManager;
