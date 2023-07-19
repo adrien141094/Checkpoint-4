@@ -13,7 +13,7 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readByUser = (req, res) => {
   models.orders
     .findByUser(req.params.id)
     .then(([rows]) => {
@@ -78,5 +78,5 @@ const read = (req, res) => {
 
 module.exports = {
   browse,
-  read,
+  readByUser,
 };
