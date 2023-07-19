@@ -44,6 +44,11 @@ const AuthManager = require("./AuthManager");
 models.users = new AuthManager();
 models.users.setDatabase(pool);
 
+const OrdersManager = require("./OrdersManager");
+
+models.orders = new OrdersManager();
+models.orders.setDatabase(pool);
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
