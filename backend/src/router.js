@@ -14,7 +14,7 @@ router.post("/articles", articlesControllers.add);
 router.delete("/articles/:id", articlesControllers.destroy);
 
 router.get("/orders", ordersControllers.browse);
-// router.get("/articles/:id", articlesControllers.read);
+router.get("/orders/:id", ordersControllers.read);
 // router.put("/articles/:id", articlesControllers.edit);
 // router.post("/articles", articlesControllers.add);
 // router.delete("/articles/:id", articlesControllers.destroy);
