@@ -1,4 +1,5 @@
 const models = require("../models");
+const articleSchema = require("../services/article");
 
 const browse = (req, res) => {
   models.articles
@@ -28,26 +29,20 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
   const article = req.body;
-
-  // TODO validations (length, format...)
-
   article.id = parseInt(req.params.id, 10);
-
-  models.articles
-    .updateArticle(article)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
+  try {
+    const { error } = await articleSchema().validate(article, {
+      abortEarly: false,
     });
+    if (error) throw new Error(error);
+    await models.articles.updateArticle(article);
+    res.status(201).json({ msg: "Article Modifié" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Modification Invalide" });
+  }
 };
 
 // const add = (req, res) => {
