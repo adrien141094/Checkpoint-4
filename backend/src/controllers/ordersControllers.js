@@ -29,34 +29,41 @@ const readByUser = (req, res) => {
     });
 };
 
-// const edit = async (req, res) => {
-//   const article = req.body;
-//   article.id = parseInt(req.params.id, 10);
+const editOrder = async (req, res) => {
+  const order = req.body;
+
+  order.id = parseInt(req.params.id, 10);
+  models.orders
+    .updateOrder(order)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.status(201).json({ msg: "modification commande ok" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// const editOrder = async (req, res) => {
+//   const order = req.body;
+//   order.id = parseInt(req.params.id, 10);
+//   console.log(req.body);
 //   try {
-//     const { error } = await checkArticleData().validate(article, {
-//       abortEarly: false,
+//     const ord = await models.orders.updateOrder(order);
+//     const userOne = await models.users.insert({
+//       ...order,
+//       user_id: userOne[0].insertId,
 //     });
-//     if (error) throw new Error(error);
-//     await models.articles.updateArticle(article);
-//     res.status(201).json({ msg: "Article Modifié" });
+//     res
+//       .status(201)
+//       .json({ ...order, user_id: userOne[0].insertId, id: ord[0].insertId });
 //   } catch (error) {
 //     console.error(error);
 //     res.status(500).json({ msg: "Modification Invalide" });
-//   }
-// };
-
-// const add = async (req, res) => {
-//   const article = req.body;
-//   try {
-//     const { error } = await checkArticleData().validate(article, {
-//       abortEarly: false,
-//     });
-//     if (error) throw new Error(error);
-//     await models.articles.insertArticle(article);
-//     res.status(201).json({ msg: "Article Créé" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ msg: "Creation Invalide" });
 //   }
 // };
 
@@ -79,4 +86,5 @@ const readByUser = (req, res) => {
 module.exports = {
   browse,
   readByUser,
+  editOrder,
 };
