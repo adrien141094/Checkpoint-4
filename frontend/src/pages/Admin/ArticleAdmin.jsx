@@ -79,7 +79,7 @@ function ArticleAdmin() {
       </div>
       <div className="pt-14 pb-4">
         <label htmlFor="" className="grid md:grid-cols-2 md:gap-6">
-          Choisir un Article :
+          Choisir un Article =
           <select
             name=""
             id=""
