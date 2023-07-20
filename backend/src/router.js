@@ -18,9 +18,11 @@ router.delete("/articles/:id", articlesControllers.destroy);
 
 router.get("/orders", ordersControllers.browse);
 router.get("/orders/:id", ordersControllers.readByUser);
+router.get("/orders/user/:id", ordersControllers.readByOrder);
 router.put("/orders/:id", ordersControllers.editOrder);
-// router.post("/articles", articlesControllers.add);
-// router.delete("/articles/:id", articlesControllers.destroy);
+router.post("/orders", ordersControllers.newOrder);
+router.post("/orders", ordersControllers.newOrder);
+router.delete("/orders/user/:id", ordersControllers.destroyOrder);
 
 router.post("/connexion", checkUserData, authControllers.signin);
 router.post("/inscription", checkUserData, authControllers.signup);

@@ -44,6 +44,7 @@ CREATE TABLE orders (
   countrie VARCHAR(255) NOT NULL,
   postal_code MEDIUMINT NOT NULL,
   coupon_code DECIMAL(10,2),
+  creation_date date,
   user_id INT NOT NULL,
   CONSTRAINT fk_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

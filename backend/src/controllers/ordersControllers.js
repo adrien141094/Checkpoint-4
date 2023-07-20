@@ -29,6 +29,22 @@ const readByUser = (req, res) => {
     });
 };
 
+const readByOrder = (req, res) => {
+  models.orders
+    .findByOrder(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const editOrder = async (req, res) => {
   const order = req.body;
 
@@ -47,44 +63,44 @@ const editOrder = async (req, res) => {
       res.sendStatus(500);
     });
 };
+const newOrder = (req, res) => {
+  const orderNew = req.body;
 
-// const editOrder = async (req, res) => {
-//   const order = req.body;
-//   order.id = parseInt(req.params.id, 10);
-//   console.log(req.body);
-//   try {
-//     const ord = await models.orders.updateOrder(order);
-//     const userOne = await models.users.insert({
-//       ...order,
-//       user_id: userOne[0].insertId,
-//     });
-//     res
-//       .status(201)
-//       .json({ ...order, user_id: userOne[0].insertId, id: ord[0].insertId });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ msg: "Modification Invalide" });
-//   }
-// };
+  models.orders
+    .insertOrder(orderNew)
+    .then(([result]) => {
+      res
+        .location(`/orders/${result.insertId}`)
+        .status(201)
+        .json({ msg: "Nouvelle commande en cours" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
-// const destroy = (req, res) => {
-//   models.articles
-//     .delete(req.params.id)
-//     .then(([result]) => {
-//       if (result.affectedRows === 0) {
-//         res.sendStatus(404);
-//       } else {
-//         res.status(201).json({ msg: "Article Supprimé" });
-//       }
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// };
+const destroyOrder = (req, res) => {
+  models.orders
+    .delete(req.params.id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.status(201).json({ msg: "Article Supprimé" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 module.exports = {
   browse,
   readByUser,
+  readByOrder,
   editOrder,
+  newOrder,
+  destroyOrder,
 };
