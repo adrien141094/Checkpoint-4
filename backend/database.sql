@@ -23,7 +23,7 @@ CREATE TABLE articles (
   color varchar(100) NOT NULL,
   description longtext NOT NULL,
   stock INTEGER NOT NULL,
-  categorie varchar(100) NOT NULL
+  categorie varchar(100)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
