@@ -26,8 +26,8 @@ function Home() {
         <h2>Découvrir par catégorie</h2>
       </div>
       <div className=" grid  grid-rows-2 grid-cols-4 gap-4 mx-44 h-[30rem] py-4 pb-10">
-        <div className="  imagebg row-span-2 col-span-2  flex justify-center items-center transition-all duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0">
-          <div className="justify-center items-center">
+        <div className=" hover:scale-105 hover:mb-4 hover:mr-4 imagebg row-span-2 col-span-2  flex justify-center items-center transition-all duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0">
+          <div className="justify-center items-center ">
             <Link to="/categorie">
               <button
                 type="button"

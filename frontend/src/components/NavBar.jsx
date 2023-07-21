@@ -7,7 +7,7 @@ function NavBar() {
     <div>
       <nav className="  bg-amber-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
-          <img src={Logo} className="h-10 mr-1" alt="logo" />
+          <img src={Logo} className="h-10 mr-3" alt="logo" />
 
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4  md:flex-row md:space-x-8 md:mt-0  ">

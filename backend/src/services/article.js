@@ -9,7 +9,7 @@ const checkArticleData = () => {
     color: Joi.string().required(),
     description: Joi.string().required(),
     stock: Joi.number().required(),
-    categorie: Joi.string().required(),
+    categorie: Joi.string(),
   });
 };
 
