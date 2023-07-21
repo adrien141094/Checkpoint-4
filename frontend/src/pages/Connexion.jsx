@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import connexion from "../services/connexion";
 import Breadcrumbs from "../components/Breadcrumbs";
 
 function Connexion() {
   const [auth, setAuth] = useState({
-    email: "",
+    mail: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleAuth = (event) => {
     setAuth({ ...auth, [event.target.name]: event.target.value });
@@ -15,7 +17,11 @@ function Connexion() {
   const login = async (event) => {
     event.preventDefault();
     try {
-      await connexion.post("/connexion", auth);
+      const log = await connexion.post("/connexion", auth);
+
+      if (log.role === 1) {
+        navigate("/admin/article");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -35,9 +41,9 @@ function Connexion() {
             <input
               id="email"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={auth.email}
+              value={auth.mail}
               type="email"
-              name="email"
+              name="mail"
               placeholder="xxx@xxx.com"
               onChange={(event) => handleAuth(event)}
               required
