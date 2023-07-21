@@ -23,6 +23,11 @@ function OneArticle() {
     <div>
       <Breadcrumbs />
       <div className="grid grid-cols-2 mx-20 w-auto">
+        <img
+          className="  ml-44 rounded-t-lg col-span-2"
+          src={oneArticle.src}
+          alt={oneArticle.alt}
+        />
         <h1 className=" text-right pr-2">Titre :</h1>
         <h1>{oneArticle.title}</h1>
         <h1 className=" text-right pr-2">infos :</h1>
@@ -33,6 +38,7 @@ function OneArticle() {
         <h1>
           {oneArticle.stock !== 0 ? "Disponible" : "Victime de son succès"}
         </h1>
+
         <h1 className=" text-right pr-2">Description :</h1>
         <h1>{oneArticle.description}</h1>
       </div>
