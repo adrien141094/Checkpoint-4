@@ -6,13 +6,16 @@ class ArticlesManager extends AbstractManager {
   }
 
   findAllArticle() {
-    return this.database.query(`select *  from  ${this.table}`);
+    return this.database.query(`select *  from  ${this.table} as a
+    inner join pictures as p on p.article_id = a.id`);
   }
 
   findByArticle(id) {
-    return this.database.query(`select * from  ${this.table} where id = ?`, [
-      id,
-    ]);
+    return this.database.query(
+      `select * from  ${this.table} as a
+    inner join pictures as p on p.article_id = a.id where a.id = ?`,
+      [id]
+    );
   }
 
   updateArticle(article) {
