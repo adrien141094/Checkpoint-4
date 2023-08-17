@@ -1,12 +1,33 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UserLayout from "./Layout/UserLayout";
 import Home from "./pages/Home";
-
+import AdminLayout from "./Layout/AdminLayout";
+import ArticleAdmin from "./pages/Admin/ArticleAdmin";
 import "./App.css";
+import Panier from "./pages/Panier";
+import Categorie from "./pages/Categorie";
+import OneArticle from "./pages/OneArticle";
+import About from "./pages/About";
+import Connexion from "./pages/Connexion";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-      <p>coucou</p>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="" element={<UserLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/categorie" element={<Categorie />} />
+            <Route path="/categorie/:id" element={<OneArticle />} />
+            <Route path="/panier" element={<Panier />} />
+            <Route path="/a_propos" element={<About />} />
+            <Route path="/connexion" element={<Connexion />} />
+          </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="article" element={<ArticleAdmin />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
