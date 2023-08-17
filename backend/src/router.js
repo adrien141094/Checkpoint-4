@@ -21,7 +21,6 @@ router.get("/orders/:id", ordersControllers.readByUser);
 router.get("/orders/user/:id", ordersControllers.readByOrder);
 router.put("/orders/:id", ordersControllers.editOrder);
 router.post("/orders", ordersControllers.newOrder);
-router.post("/orders", ordersControllers.newOrder);
 router.delete("/orders/user/:id", ordersControllers.destroyOrder);
 
 router.post("/connexion", checkUserData, authControllers.signin);
